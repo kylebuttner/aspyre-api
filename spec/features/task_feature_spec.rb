@@ -51,6 +51,22 @@ describe 'tasks', type: :request do
     end
   end
 
+  describe 'DELETE /tasks' do
+
+    before :each do
+      FactoryGirl.create_list(:task, 3)
+    end
+
+    context 'delete tasks' do
+      it 'deletes a task entry' do
+        delete("/tasks/1")
+
+        expect(response.status).to eq 204
+        expect(Task.count).to eq(2)
+      end
+    end
+  end
+
 
 
 
