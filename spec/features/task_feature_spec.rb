@@ -15,7 +15,7 @@ describe 'tasks', type: :request do
       FactoryGirl.create_list(:task, 3)
     end
 
-    it 'returns all tasks' do
+    it 'returns all tasks for a given goal' do
       get('/goals/1/tasks', {}, request_headers)
 
       expect(response.status).to eq(200)
@@ -28,12 +28,11 @@ describe 'tasks', type: :request do
   describe 'POST /tasks' do
 
     it 'creates a task' do
-      task_params = {name: "Task thing" }.to_json
-
+      task_params = FactoryGirl.create(:task).to_json
       post('/goals/1/tasks', task_params, request_headers)
-
+      
       expect(response.status).to eq(201)
-      expect(Task.first.name).to eq("Task thing")
+      expect(Task.first.name).to eq("FactoryTaskName")
     end
 
   end

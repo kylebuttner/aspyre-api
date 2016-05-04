@@ -6,8 +6,8 @@ class Task < ActiveRecord::Base
     Task.where(goal_id: current_goal.id)
   end
 
-  def self.create_task(name: name)
-    Task.create(name: name)
+  def self.create_task(task_name)
+    Task.create(task_name)
   end
 
 end

@@ -5,8 +5,8 @@ class Goal < ActiveRecord::Base
     Goal.all
   end
 
-  def self.create_goal(name: name)
-    Goal.create(name: name)
+  def self.create_goal(goal_name)
+    Goal.create(goal_name)
   end
 
 end
