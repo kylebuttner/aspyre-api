@@ -21,13 +21,30 @@ describe 'Goals', type: :request do
   end
 
   describe 'POST /goals' do 
-    it 'creates a goal' do
-      goal_params = {name: "Learn piano"}.to_json
+    context 'create goals' do
+      it 'saves a goal to the model' do
+        goal_params = {name: "Learn piano"}.to_json
 
-      post("/goals", goal_params, request_headers)
+        post("/goals", goal_params, request_headers)
 
-      expect(response.status).to eq 201
-      expect(Goal.first.name).to eq("Learn piano")
+        expect(response.status).to eq 201
+        expect(Goal.first.name).to eq("Learn piano")
+      end
+    end
+  end
+
+  describe 'PUT /goals' do 
+    context 'update goals' do
+      it 'updates the entry of a goal' do
+        goal = FactoryGirl.create(:goal)
+        goal_params = {name: "Learn violin"}.to_json
+
+
+        put("/goals/1", goal_params, request_headers)
+
+        expect(response.status).to eq 202
+        expect(Goal.first.name).to eq("Learn violin")
+      end 
     end
   end
 end
