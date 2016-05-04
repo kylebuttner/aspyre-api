@@ -1,5 +1,4 @@
 class GoalsController < ApplicationController
-
   def index
     @goals = Goal.get_goals
     render json: @goals
@@ -11,23 +10,18 @@ class GoalsController < ApplicationController
   end
 
   def update
-    current_goal = Goal.find(params[:id])
-    current_goal.update(goal_params)
+    Goal.update_goal((params[:id]), goal_params)
     render json:{}, status: :accepted
   end
 
   def destroy
-    current_goal = Goal.find(params[:id])
-    current_goal.destroy
+    Goal.destroy_goal(params[:id])
     render nothing: true, status: :no_content
   end
-
-
 
   private
 
     def goal_params
       params.require(:goal).permit(:name)
     end
-
 end
