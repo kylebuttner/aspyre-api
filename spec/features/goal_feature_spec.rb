@@ -19,9 +19,9 @@ describe 'Goals', type: :request do
       expect(parsed_response.length).to eq(3)
     end
   end
-  
-  describe 'POST/movies' do 
-    it 'creates a goal' do 
+
+  describe 'POST /goals' do 
+    it 'creates a goal' do
       goal_params = {name: "Learn piano"}.to_json
 
       post("/goals", goal_params, request_headers)
