@@ -1,5 +1,5 @@
 class Goal < ActiveRecord::Base
-  has_many :tasks
+  has_many :tasks, dependent: :destroy
 
   def self.get_goals
     Goal.all

@@ -1,4 +1,5 @@
 class Task < ActiveRecord::Base
+  belongs_to :goal
 
   def self.get_tasks(goal_id)
     current_goal = Goal.find(goal_id)
