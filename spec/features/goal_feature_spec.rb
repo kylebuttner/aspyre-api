@@ -20,7 +20,7 @@ describe 'Goals', type: :request do
     end
   end
 
-  describe 'POST /goals' do 
+  describe 'POST /goals' do
     context 'create goals' do
       it 'saves a goal to the model' do
         goal_params = {name: "Learn piano"}.to_json
@@ -33,7 +33,7 @@ describe 'Goals', type: :request do
     end
   end
 
-  describe 'PUT /goals' do 
+  describe 'PUT /goals' do
     context 'update goals' do
       it 'updates the entry of a goal' do
         goal = FactoryGirl.create(:goal)
@@ -44,7 +44,23 @@ describe 'Goals', type: :request do
 
         expect(response.status).to eq 202
         expect(Goal.first.name).to eq("Learn violin")
-      end 
+      end
+    end
+  end
+
+  describe 'DELETE /goals' do
+
+    before :each do
+      FactoryGirl.create_list(:goal, 3)
+    end
+    
+    context 'delete goals' do
+      it 'deletes a goal entry' do
+        delete("/goals/1")
+
+        expect(response.status).to eq 204
+        expect(Goal.count).to eq(2)
+      end
     end
   end
 end
