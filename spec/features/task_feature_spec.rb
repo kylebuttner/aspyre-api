@@ -26,7 +26,6 @@ describe 'tasks', type: :request do
   end
 
   describe 'POST /tasks' do
-
     it 'creates a task' do
       task_params = FactoryGirl.create(:task).to_json
       post('/goals/1/tasks', task_params, request_headers)
@@ -34,36 +33,29 @@ describe 'tasks', type: :request do
       expect(response.status).to eq(201)
       expect(Task.first.name).to eq("FactoryTaskName")
     end
-
   end
 
   describe 'PUT /tasks' do
-    context 'update tasks' do
-      it 'updates the entry of a task' do
-        # FactoryGirl.create_list(:task, 3)
-        task = FactoryGirl.create(:task)
-        task_params = {name: "Step 1"}.to_json
-        put("/tasks/1", task_params, request_headers)
+    it 'updates the entry of a task' do
+      task = FactoryGirl.create(:task)
+      task_params = {name: "Step 1"}.to_json
+      put("/tasks/1", task_params, request_headers)
 
-        expect(response.status).to eq 202
-        expect(Task.first.name).to eq("Step 1")
+      expect(response.status).to eq 202
+      expect(Task.first.name).to eq("Step 1")
       end
-    end
   end
 
   describe 'DELETE /tasks' do
-
     before :each do
       FactoryGirl.create_list(:task, 3)
     end
 
-    context 'delete tasks' do
-      it 'deletes a task entry' do
-        delete("/tasks/1")
+    it 'deletes a task entry' do
+      delete("/tasks/1")
 
-        expect(response.status).to eq 204
-        expect(Task.count).to eq(2)
-      end
+      expect(response.status).to eq 204
+      expect(Task.count).to eq(2)
     end
   end
 

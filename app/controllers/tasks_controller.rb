@@ -20,11 +20,9 @@ class TasksController < ApplicationController
     render nothing: true, status: :no_content
   end
 
-
   private
 
     def task_params
       params.require(:task).permit(:name)
     end
-
 end

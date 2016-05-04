@@ -18,6 +18,4 @@ class Task < ActiveRecord::Base
   def self.destroy_task(task_id)
     Task.destroy(task_id)
   end
-
-
 end
