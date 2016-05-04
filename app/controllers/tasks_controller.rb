@@ -5,5 +5,9 @@ class TasksController < ApplicationController
     render json: @tasks
   end
 
+  def create
+    Task.create_task(name: params[:name])
+    render json:{}, status: :created
+  end
 
 end

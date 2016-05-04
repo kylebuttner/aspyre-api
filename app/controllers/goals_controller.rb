@@ -1,18 +1,13 @@
 class GoalsController < ApplicationController
 
   def index
-    @goals = Goal.all
+    @goals = Goal.get_goals
     render json: @goals
   end
 
   def create
-    Goal.create(name: params[:name])
-    render json:{}, status: :created  
+    Goal.create_goal(name: params[:name])
+    render json:{}, status: :created
   end
 
-private
-
-  def goals_params
-    params.require(:goal).permit(:name)
-  end
 end
