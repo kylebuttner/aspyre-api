@@ -30,11 +30,25 @@ describe 'tasks', type: :request do
     it 'creates a task' do
       task_params = FactoryGirl.create(:task).to_json
       post('/goals/1/tasks', task_params, request_headers)
-      
+
       expect(response.status).to eq(201)
       expect(Task.first.name).to eq("FactoryTaskName")
     end
 
+  end
+
+  describe 'PUT /tasks' do
+    context 'update tasks' do
+      it 'updates the entry of a task' do
+        # FactoryGirl.create_list(:task, 3)
+        task = FactoryGirl.create(:task)
+        task_params = {name: "Step 1"}.to_json
+        put("/tasks/1", task_params, request_headers)
+
+        expect(response.status).to eq 202
+        expect(Task.first.name).to eq("Step 1")
+      end
+    end
   end
 
 

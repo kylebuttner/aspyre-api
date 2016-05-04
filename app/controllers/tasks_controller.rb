@@ -10,4 +10,16 @@ class TasksController < ApplicationController
     render json:{}, status: :created
   end
 
+  def update
+    current_task = Task.find(params[:id])
+    current_task.update(task_params)
+    render json:{}, status: :accepted
+  end
+
+  private
+
+    def task_params
+      params.require(:task).permit(:name)
+    end
+
 end
