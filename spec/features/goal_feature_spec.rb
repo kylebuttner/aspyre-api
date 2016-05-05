@@ -20,7 +20,7 @@ describe 'Goals', type: :request do
     end
   end
 
-  describe 'POST /goals' do 
+  describe 'POST /goals' do
     it 'creates a goal' do
       goal_params = {name: "Learn piano"}.to_json
 
