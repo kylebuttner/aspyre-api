@@ -21,46 +21,38 @@ describe 'Goals', type: :request do
   end
 
   describe 'POST /goals' do
-    context 'create goals' do
-      it 'saves a goal to the model' do
-        goal_params = {name: "Learn piano"}.to_json
+    it 'saves a goal to the model' do
+      goal_params = {name: "Learn piano"}.to_json
 
-        post("/goals", goal_params, request_headers)
+      post("/goals", goal_params, request_headers)
 
-        expect(response.status).to eq 201
-        expect(Goal.first.name).to eq("Learn piano")
-      end
+      expect(response.status).to eq 201
+      expect(Goal.first.name).to eq("Learn piano")
     end
   end
 
   describe 'PUT /goals' do
-    context 'update goals' do
-      it 'updates the entry of a goal' do
-        goal = FactoryGirl.create(:goal)
-        goal_params = {name: "Learn violin"}.to_json
+    it 'updates the entry of a goal' do
+      goal = FactoryGirl.create(:goal)
+      goal_params = {name: "Learn violin"}.to_json
 
+      put("/goals/1", goal_params, request_headers)
 
-        put("/goals/1", goal_params, request_headers)
-
-        expect(response.status).to eq 202
-        expect(Goal.first.name).to eq("Learn violin")
-      end
+      expect(response.status).to eq 202
+      expect(Goal.first.name).to eq("Learn violin")
     end
   end
 
   describe 'DELETE /goals' do
-
     before :each do
       FactoryGirl.create_list(:goal, 3)
     end
-    
-    context 'delete goals' do
-      it 'deletes a goal entry' do
-        delete("/goals/1")
 
-        expect(response.status).to eq 204
-        expect(Goal.count).to eq(2)
-      end
+    it 'deletes a goal entry' do
+      delete("/goals/1")
+
+      expect(response.status).to eq 204
+      expect(Goal.count).to eq(2)
     end
   end
 end
