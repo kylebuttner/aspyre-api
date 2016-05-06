@@ -28,6 +28,7 @@ group :development, :test do
   gem 'shoulda'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
+  gem 'dotenv-rails'
 end
 
 group :development do
