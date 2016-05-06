@@ -1,4 +1,5 @@
 class GoalsController < ApplicationController
+  
   def index
     @goals = Goal.get_goals
     render json: @goals
