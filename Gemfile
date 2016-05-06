@@ -7,6 +7,9 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'rack-cors'
+gem 'devise_token_auth'
+gem 'devise'
+gem 'omniauth'
 
 
 gem 'jquery-rails'
@@ -30,5 +33,4 @@ end
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
-  gem 'devise_token_auth'
 end
