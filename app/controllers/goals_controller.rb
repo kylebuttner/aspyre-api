@@ -1,5 +1,4 @@
 class GoalsController < ApplicationController
-  skip_before_filter  :verify_authenticity_token
   
   def index
     @goals = Goal.get_goals
