@@ -1,9 +1,10 @@
 class Goal < ActiveRecord::Base
   has_many :tasks, dependent: :destroy
+  belongs_to :user
   validates_presence_of :name
 
-  def self.get_goals
-    Goal.all
+  def self.get_goals(user_id)
+    Goal.where(user_id: user_id)
   end
 
   def self.create_goal(goal_name)
