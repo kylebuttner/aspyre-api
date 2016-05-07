@@ -7,6 +7,10 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'rack-cors'
+gem 'devise_token_auth'
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-github'
 
 
 gem 'jquery-rails'
@@ -25,6 +29,7 @@ group :development, :test do
   gem 'shoulda'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
+  gem 'dotenv-rails'
 end
 
 group :development do
