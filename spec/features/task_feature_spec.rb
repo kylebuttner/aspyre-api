@@ -3,10 +3,13 @@ require 'rails_helper'
 describe 'tasks', type: :request do
 
   let(:parsed_response) { JSON.parse(response.body) }
-  let(:request_headers) {{"Accept" => "application/json", "Content-Type" => "application/json"}}
 
   before :each do
     FactoryGirl.create(:goal)
+    @user = FactoryGirl.create :user
+    @request_headers = {"Accept" => "application/json", "Content-Type" => "application/json"}
+    @auth_headers = @user.create_new_auth_token
+    @request_headers.merge!(@auth_headers)
   end
 
   describe 'GET /tasks' do
@@ -16,7 +19,7 @@ describe 'tasks', type: :request do
     end
 
     it 'returns all tasks for a given goal' do
-      get('/goals/1/tasks', {}, request_headers)
+      get('/goals/1/tasks', {}, @request_headers)
 
       expect(response.status).to eq(200)
 
@@ -28,7 +31,7 @@ describe 'tasks', type: :request do
   describe 'POST /tasks' do
     it 'creates a task' do
       task_params = FactoryGirl.create(:task).to_json
-      post('/goals/1/tasks', task_params, request_headers)
+      post('/goals/1/tasks', task_params, @request_headers)
 
       expect(response.status).to eq(201)
       expect(Task.first.name).to eq("FactoryTaskName")
@@ -39,7 +42,7 @@ describe 'tasks', type: :request do
     it 'updates the entry of a task' do
       task = FactoryGirl.create(:task)
       task_params = {name: "Step 1"}.to_json
-      put("/tasks/1", task_params, request_headers)
+      put("/tasks/1", task_params, @request_headers)
 
       expect(response.status).to eq 202
       expect(Task.first.name).to eq("Step 1")
@@ -52,7 +55,7 @@ describe 'tasks', type: :request do
     end
 
     it 'deletes a task entry' do
-      delete("/tasks/1")
+      delete("/tasks/1", @request_headers)
 
       expect(response.status).to eq 204
       expect(Task.count).to eq(2)
