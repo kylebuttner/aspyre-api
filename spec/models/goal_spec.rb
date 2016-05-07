@@ -14,6 +14,20 @@ RSpec.describe Goal, type: :model do
         expect(Goal.get_goals(@user1.id)).to match_array @user1.goals
       end
     end
+
+    describe '#create_goal' do
+      it 'should create a goal with a user_id' do
+        Goal.create_goal({"name": "goal 1"}, @user1.id)
+        expect(Goal.all.last.name).to eq "goal 1"
+      end
+    end
+
+    describe '#update_goal' do
+      it 'should update a goal' do
+        Goal.update_goal(3, {"name": "updated"})
+        expect(Goal.find(3).name).to eq "updated"
+      end
+    end
   end
 
   context "validation" do

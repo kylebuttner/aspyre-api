@@ -7,8 +7,9 @@ class Goal < ActiveRecord::Base
     Goal.where(user_id: user_id)
   end
 
-  def self.create_goal(goal_name)
-    Goal.create(goal_name)
+  def self.create_goal(goal_name, user_id)
+    user = User.find(user_id)
+    user.goals.create(goal_name)
   end
 
   def self.update_goal(goal_id, goal_name)

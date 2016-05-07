@@ -8,7 +8,7 @@ class GoalsController < ApplicationController
   end
 
   def create
-    Goal.create_goal(goal_params)
+    Goal.create_goal(goal_params, current_user.id)
     render json:{}, status: :created
   end
 
