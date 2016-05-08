@@ -31,7 +31,6 @@ RSpec.describe Goal, type: :model do
 
     describe '#destroy_goal' do
       it 'should destroy a goal' do
-        p Goal.all.count
         expect{Goal.destroy_goal(2)}.to change{Goal.all.count}.by(-1)
       end
     end
