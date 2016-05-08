@@ -8,7 +8,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    Task.create_task(task_params, params[:goal_id])
+    Task.create_task(task_params)
     render json:{}, status: :created
   end
 
@@ -25,6 +25,6 @@ class TasksController < ApplicationController
   private
 
     def task_params
-      params.require(:task).permit(:name, :goal_id)
+      params.require(:task).permit(:name)
     end
 end
