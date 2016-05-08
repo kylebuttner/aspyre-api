@@ -1,12 +1,14 @@
 class GoalsController < ApplicationController
-  
+
+  before_action :authenticate_user!
+
   def index
-    @goals = Goal.get_goals
+    @goals = Goal.get_goals(current_user.id)
     render json: @goals
   end
 
   def create
-    Goal.create_goal(goal_params)
+    Goal.create_goal(goal_params, current_user.id)
     render json:{}, status: :created
   end
 

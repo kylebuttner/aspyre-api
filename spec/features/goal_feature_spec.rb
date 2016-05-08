@@ -3,15 +3,17 @@ require 'rails_helper'
 describe 'Goals', type: :request do
   let(:parsed_response) { JSON.parse(response.body) }
 
-  let(:request_headers) {{"Accept" => "application/json", "Content-Type" => "application/json"}}
+  before :each do
+    @user = FactoryGirl.create :user_with_goals
+    @request_headers = {"Accept" => "application/json", "Content-Type" => "application/json"}
+    @auth_headers = @user.create_new_auth_token
+    @request_headers.merge!(@auth_headers)
+  end
 
   describe 'GET /goals' do
-    before :each do
-      FactoryGirl.create_list(:goal, 3)
-    end
 
     it 'returns all goals' do
-      get('/goals', {}, request_headers)
+      get('/goals', {}, @request_headers)
 
       expect(response.status).to eq 200
 
@@ -24,19 +26,18 @@ describe 'Goals', type: :request do
     it 'saves a goal to the model' do
       goal_params = {name: "Learn piano"}.to_json
 
-      post("/goals", goal_params, request_headers)
+      post("/goals", goal_params, @request_headers)
 
       expect(response.status).to eq 201
-      expect(Goal.first.name).to eq("Learn piano")
+      expect(Goal.last.name).to eq("Learn piano")
     end
   end
 
   describe 'PUT /goals' do
     it 'updates the entry of a goal' do
-      goal = FactoryGirl.create(:goal)
       goal_params = {name: "Learn violin"}.to_json
 
-      put("/goals/1", goal_params, request_headers)
+      put("/goals/1", goal_params, @request_headers)
 
       expect(response.status).to eq 202
       expect(Goal.first.name).to eq("Learn violin")
@@ -44,12 +45,9 @@ describe 'Goals', type: :request do
   end
 
   describe 'DELETE /goals' do
-    before :each do
-      FactoryGirl.create_list(:goal, 3)
-    end
 
     it 'deletes a goal entry' do
-      delete("/goals/1")
+      delete("/goals/1", @request_headers)
 
       expect(response.status).to eq 204
       expect(Goal.count).to eq(2)
