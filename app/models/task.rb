@@ -11,9 +11,9 @@ class Task < ActiveRecord::Base
     goal.tasks.create(task_name)
   end
 
-  def self.update_task(task_id, task_name)
+  def self.update_task(task_id, task_params)
     current_task = Task.find(task_id)
-    current_task.update(task_name)
+    current_task.update(task_params)
   end
 
   def self.destroy_task(task_id)

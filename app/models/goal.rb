@@ -12,9 +12,9 @@ class Goal < ActiveRecord::Base
     user.goals.create(goal_name)
   end
 
-  def self.update_goal(goal_id, goal_name)
+  def self.update_goal(goal_id, goal_params)
     current_goal = Goal.find(goal_id)
-    current_goal.update(goal_name)
+    current_goal.update(goal_params)
   end
 
   def self.destroy_goal(goal_id)
