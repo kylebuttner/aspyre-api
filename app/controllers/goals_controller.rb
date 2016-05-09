@@ -14,9 +14,6 @@ class GoalsController < ApplicationController
 
   def update
     Goal.update_goal((params[:id]), goal_params)
-    puts 'controller params'
-    p params
-    puts
     render json:{}, status: :accepted
   end
 
