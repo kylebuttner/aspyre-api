@@ -11,25 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160507142307) do
+ActiveRecord::Schema.define(version: 20160509100945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "goals", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "user_id"
+    t.boolean  "completed",  default: false
   end
 
   add_index "goals", ["user_id"], name: "index_goals_on_user_id", using: :btree
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "goal_id"
+    t.boolean  "completed",  default: false
+    t.string   "frequency"
   end
 
   add_index "tasks", ["goal_id"], name: "index_tasks_on_goal_id", using: :btree
