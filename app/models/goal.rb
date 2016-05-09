@@ -13,6 +13,9 @@ class Goal < ActiveRecord::Base
   end
 
   def self.update_goal(goal_id, goal_params)
+    puts 'valuesssssssss'
+    p goal_params
+    puts
     current_goal = Goal.find(goal_id)
     current_goal.update(goal_params)
   end

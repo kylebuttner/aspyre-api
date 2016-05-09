@@ -14,6 +14,9 @@ class GoalsController < ApplicationController
 
   def update
     Goal.update_goal((params[:id]), goal_params)
+    puts 'controller params'
+    p params
+    puts
     render json:{}, status: :accepted
   end
 
@@ -25,6 +28,6 @@ class GoalsController < ApplicationController
   private
 
     def goal_params
-      params.require(:goal).permit(:name, :complete)
+      params.require(:goal).permit(:name, :completed)
     end
 end
