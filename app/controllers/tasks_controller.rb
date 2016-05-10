@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @tasks = Task.get_tasks(params[:goal_id])
+    @tasks = Task.get_tasks(params[:goal_id], current_user)
     render json: @tasks
   end
 

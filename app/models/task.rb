@@ -2,9 +2,9 @@ class Task < ActiveRecord::Base
   belongs_to :goal
   belongs_to :user
 
-  def self.get_tasks(goal_id)
-    current_goal = Goal.find(goal_id)
-    Task.where(goal_id: current_goal.id)
+  def self.get_tasks(goal_id, user)
+    return self.get_goal_task(goal_id) if goal_id
+    self.all_tasks(user.id)
   end
 
   def self.create_task(task_params, goal_id)
@@ -24,14 +24,23 @@ class Task < ActiveRecord::Base
 
 private
 
+  def self.all_tasks(user_id)
+    Task.where(user_id: user_id)
+  end
+
+  def self.get_goal_task(goal_id)
+    current_goal = Goal.find(goal_id)
+    Task.where(goal_id: current_goal.id)
+  end
+
   def self.add_user_id(task)
-    user = self.get_user_id(task)
+    user = self.get_user_id(task.goal_id)
     task.user_id = user.id
     task.save
   end
 
-  def self.get_user_id(task)
-    goal = Goal.find(task.goal_id)
+  def self.get_user_id(goal_id)
+    goal = Goal.find(goal_id)
     user = User.find(goal.user_id)
   end
 end

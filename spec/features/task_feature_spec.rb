@@ -20,9 +20,8 @@ describe 'tasks', type: :request do
 
     it 'returns all tasks for a given goal' do
       get('/goals/1/tasks', {}, @request_headers)
-
+      
       expect(response.status).to eq(200)
-
       expect(parsed_response[0]['name']).to eq('FactoryTaskName')
       expect(parsed_response.length).to eq(3)
     end
