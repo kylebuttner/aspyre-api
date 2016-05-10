@@ -5,8 +5,8 @@ describe 'tasks', type: :request do
   let(:parsed_response) { JSON.parse(response.body) }
 
   before :each do
-    FactoryGirl.create(:goal)
-    @user = FactoryGirl.create :user
+    
+    @user = FactoryGirl.create :user_with_goals
     @request_headers = {"Accept" => "application/json", "Content-Type" => "application/json"}
     @auth_headers = @user.create_new_auth_token
     @request_headers.merge!(@auth_headers)
