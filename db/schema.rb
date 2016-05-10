@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160509100945) do
+ActiveRecord::Schema.define(version: 20160510095004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,9 +33,11 @@ ActiveRecord::Schema.define(version: 20160509100945) do
     t.integer  "goal_id"
     t.boolean  "completed",  default: false
     t.string   "frequency"
+    t.integer  "user_id"
   end
 
   add_index "tasks", ["goal_id"], name: "index_tasks_on_goal_id", using: :btree
+  add_index "tasks", ["user_id"], name: "index_tasks_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "provider",               default: "email", null: false
@@ -68,4 +70,5 @@ ActiveRecord::Schema.define(version: 20160509100945) do
 
   add_foreign_key "goals", "users"
   add_foreign_key "tasks", "goals"
+  add_foreign_key "tasks", "users"
 end
