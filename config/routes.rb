@@ -2,8 +2,7 @@ Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'auth'
 
   resources :goals, shallow: true do
-    resources :tasks do
-    end
+    resources :tasks
   end
 
   get 'tasks', to: 'tasks#index', as: :all_tasks
