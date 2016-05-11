@@ -24,12 +24,12 @@ RSpec.describe Task, type: :model do
       end
     end
 
-    # describe '#create_goal' do
-    #   it 'should create a goal with a user_id' do
-    #     Goal.create_goal({"name": "goal 1"}, @user1.id)
-    #     expect(Goal.all.last.name).to eq "goal 1"
-    #   end
-    # end
+    describe '#create_task' do
+      it 'should create a task with a goal_id' do
+        Task.create_task({"name": "Task1", "completed": false, "frequency": "daily"}, @goal1.id)
+        expect(Task.all.last.name).to eq "Task1"
+      end
+    end
     #
     # describe '#update_goal' do
     #   it 'should update a goal' do
