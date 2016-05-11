@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe Task, type: :model do
   before :each do
     @user1 = FactoryGirl.create :user_with_goals
-    @user2 = FactoryGirl.create :user_with_goals
     @goal1 = FactoryGirl.create :goal_with_tasks
   end
   it { is_expected.to belong_to(:goal) }
@@ -19,14 +18,13 @@ RSpec.describe Task, type: :model do
   describe "CRUD methods" do
     describe "#get_tasks" do
       it 'should only retrieve current user tasks' do
-        expect((Task.get_tasks(@goal1.id, 1)).length).to eq(3)
-        # to match_array @goal1.tasks
+        expect(Task.get_tasks(@goal1.id, 1)).to match_array @goal1.tasks
       end
     end
 
     describe '#create_task' do
       it 'should create a task with a goal_id' do
-        Task.create_task({"name": "Task1", "completed": false, "frequency": "daily"}, @goal1.id)
+        Task.create_task({"name": "Task1", "completed": false, "frequency": "daily"}, 1)
         expect(Task.all.last.name).to eq "Task1"
       end
     end

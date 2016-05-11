@@ -1,10 +1,7 @@
 FactoryGirl.define do
-  # factory :goal do
-  #   name "FactoryGoalName"
-  # end
+
   factory :goal do |u|
     u.sequence(:name) { |n| "FactoryGoalName#{n}"}
-    # g.sequence(:id)
 
     factory :goal_with_tasks do
       after :create do |goal|
@@ -13,5 +10,6 @@ FactoryGirl.define do
         end
       end
     end
+    
   end
 end
