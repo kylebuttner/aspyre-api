@@ -24,12 +24,12 @@ RSpec.describe Task, type: :model do
       end
     end
 
-    # describe '#create_task' do
-    #   it 'should create a task with a goal_id' do
-    #     Task.create_task({"name": "Task1", "completed": false, "frequency": "daily"}, @goal1.id)
-    #     expect(Task.all.last.name).to eq "Task1"
-    #   end
-    # end
+    describe '#create_task' do
+      it 'should create a task with a goal_id' do
+        Task.create_task({"name": "Task1", "completed": false, "frequency": "daily"}, @goal1.id)
+        expect(Task.all.last.name).to eq "Task1"
+      end
+    end
 
     describe '#update_task' do
       it 'should update a task' do
@@ -38,10 +38,10 @@ RSpec.describe Task, type: :model do
       end
     end
 
-    # describe '#destroy_goal' do
-    #   it 'should destroy a goal' do
-    #     expect{Goal.destroy_goal(2)}.to change{Goal.all.count}.by(-1)
-    #   end
-    # end
+    describe '#destroy_task' do
+      it 'should destroy a task' do
+        expect{Task.destroy_task(2)}.to change{Task.all.count}.by(-1)
+      end
+    end
   end
 end
