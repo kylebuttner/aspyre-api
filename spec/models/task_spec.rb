@@ -24,20 +24,20 @@ RSpec.describe Task, type: :model do
       end
     end
 
-    describe '#create_task' do
-      it 'should create a task with a goal_id' do
-        Task.create_task({"name": "Task1", "completed": false, "frequency": "daily"}, @goal1.id)
-        expect(Task.all.last.name).to eq "Task1"
-      end
-    end
-    #
-    # describe '#update_goal' do
-    #   it 'should update a goal' do
-    #     Goal.update_goal(3, {"name": "updated"})
-    #     expect(Goal.find(3).name).to eq "updated"
+    # describe '#create_task' do
+    #   it 'should create a task with a goal_id' do
+    #     Task.create_task({"name": "Task1", "completed": false, "frequency": "daily"}, @goal1.id)
+    #     expect(Task.all.last.name).to eq "Task1"
     #   end
     # end
-    #
+
+    describe '#update_task' do
+      it 'should update a task' do
+        Task.update_task(1, {"name": "updated"})
+        expect(Task.find(1).name).to eq "updated"
+      end
+    end
+
     # describe '#destroy_goal' do
     #   it 'should destroy a goal' do
     #     expect{Goal.destroy_goal(2)}.to change{Goal.all.count}.by(-1)
