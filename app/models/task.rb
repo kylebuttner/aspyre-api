@@ -1,6 +1,7 @@
 class Task < ActiveRecord::Base
   belongs_to :goal
   belongs_to :user
+  validates_presence_of :name
 
   def self.get_tasks(goal_id, user_id)
     return self.get_goal_task(goal_id) if goal_id
