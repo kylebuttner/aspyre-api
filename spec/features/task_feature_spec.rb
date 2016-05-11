@@ -5,7 +5,7 @@ describe 'tasks', type: :request do
   let(:parsed_response) { JSON.parse(response.body) }
 
   before :each do
-    
+
     @user = FactoryGirl.create :user_with_goals
     @request_headers = {"Accept" => "application/json", "Content-Type" => "application/json"}
     @auth_headers = @user.create_new_auth_token
@@ -20,7 +20,15 @@ describe 'tasks', type: :request do
 
     it 'returns all tasks for a given goal' do
       get('/goals/1/tasks', {}, @request_headers)
-      
+
+      expect(response.status).to eq(200)
+      expect(parsed_response[0]['name']).to eq('FactoryTaskName')
+      expect(parsed_response.length).to eq(3)
+    end
+
+    it 'returns all tasks for a user when there is no given goal' do
+      get('/tasks', {}, @request_headers)
+
       expect(response.status).to eq(200)
       expect(parsed_response[0]['name']).to eq('FactoryTaskName')
       expect(parsed_response.length).to eq(3)
@@ -60,9 +68,4 @@ describe 'tasks', type: :request do
       expect(Task.count).to eq(2)
     end
   end
-
-
-
-
-
 end
