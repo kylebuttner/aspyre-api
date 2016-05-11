@@ -19,7 +19,7 @@ RSpec.describe Task, type: :model do
   describe "CRUD methods" do
     describe "#get_tasks" do
       it 'should only retrieve current user tasks' do
-        expect((Task.get_task(@goal1.id, 1)).length).to eq(3)
+        expect((Task.get_tasks(@goal1.id, 1)).length).to eq(3)
         # to match_array @goal1.tasks
       end
     end
