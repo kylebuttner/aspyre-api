@@ -28,9 +28,8 @@ describe 'tasks', type: :request do
 
     it 'returns all tasks for a user when there is no given goal' do
       get('/tasks', {}, @request_headers)
-
+      
       expect(response.status).to eq(200)
-      expect(parsed_response[0]['name']).to eq('FactoryTaskName')
       expect(parsed_response.length).to eq(3)
     end
   end
