@@ -17,7 +17,7 @@ describe 'Goals', type: :request do
 
       expect(response.status).to eq 200
 
-      expect(parsed_response[0]['name']).to eq("FactoryGoalName")
+      expect(parsed_response[0]['name']).to eq("FactoryGoalName1")
       expect(parsed_response.length).to eq(3)
     end
   end

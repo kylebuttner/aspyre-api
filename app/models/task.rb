@@ -1,6 +1,7 @@
 class Task < ActiveRecord::Base
   belongs_to :goal
   belongs_to :user
+  validates_presence_of :name
 
   def self.get_tasks(goal_id, user_id)
     return self.get_goal_task(goal_id) if goal_id
@@ -22,7 +23,7 @@ class Task < ActiveRecord::Base
     Task.destroy(task_id)
   end
 
-private
+  private
 
   def self.all_tasks(user_id)
     Task.where(user_id: user_id)

@@ -5,8 +5,9 @@ RSpec.describe Goal, type: :model do
     @user1 = FactoryGirl.create :user_with_goals
     @user2 = FactoryGirl.create :user_with_goals
   end
-  
+
   it { is_expected.to have_many(:tasks).dependent(:destroy) }
+  it { is_expected.to belong_to(:user) }
 
   describe "CRUD methods" do
     describe "#get_goals" do
