@@ -23,7 +23,7 @@ class Task < ActiveRecord::Base
     Task.destroy(task_id)
   end
 
-private
+  private
 
   def self.all_tasks(user_id)
     Task.where(user_id: user_id)
